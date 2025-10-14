@@ -3,3 +3,4 @@
 
 Analysis of multi-year workout data to track strength progression, volume, and performance trends across key muscle groups.
 This project consolidates three years (2022–2025) of personal workout data to analyze training progression across major muscle groups. Metrics include total load, total sets, total reps, weight per rep, and strength gain. The analysis highlights trends, identifies peak performance, and visualizes progression over 8-week training blocks. Visualizations are created in Python (Pandas, Matplotlib, Seaborn) and the dataset is prepared for easy exploration and future dashboard integration.
+Link for Tableau: (Insert Later)
