@@ -1,24 +1,26 @@
-# Workout-Progress-Analytics
+# Workout-Progress-Analysis
 > This project is being developed iteratively. Each version documents progress, reasoning, and next steps as I build out a full data analysis pipeline using Python and Pandas.
 
-#Workout Progress Analysis
+---
 
-## Project Overview
+## Workout Progress Analysis
+
+### Project Overview
 This project consolidates three years (2022–2025) of personal workout data to analyze training progression across all major muscle groups. The dataset was engineered from multiple extracted metrics — total load, total sets, total reps, and weight per rep — to reveal long-term strength and performance trends. 
 
 The analysis and visualizations were conducted using Python (Pandas, Matplotlib, Seaborn), providing a full data analytics workflow from transformation to insight generation.
 
 ---
 
-## Objectives
-- Engineer multiple training metric tables and merge them into one analytical dataset.
-- Track strength and volume progression across muscle groups over time.
-- Identify peak performance periods and plateaus.
+### Objectives
+- Engineer multiple training metric tables and merge them into one analytical dataset.  
+- Track strength and volume progression across muscle groups over time.  
+- Identify peak performance periods and plateaus.  
 - Visualize 8-week block progressions for better periodization insights.
 
 ---
 
-## Dataset Engineering
+### Dataset Engineering
 Two original raw datasets were used to generate **four derived tables** based on key training metrics:
 
 | Table | Purpose | Columns (9 total each) |
@@ -28,73 +30,64 @@ Two original raw datasets were used to generate **four derived tables** based on
 | **Total_Reps** | Total repetitions performed per session | Same 9 columns |
 | **Weight_Per_Rep** | Weight lifted per repetition across exercises | Same 9 columns |
 
-Each metric table contained **data for all nine major muscle groups**, capturing full-body workload balance.  
-After these were cleaned and standardized, they were **merged into a unified dataset** that powers the entire analysis.
+Each metric table contained **data for all nine major muscle groups**, capturing full-body workload balance. After cleaning and standardization, they were **merged into a unified dataset** that powers the entire analysis.
 
 ---
 
-## Tech Stack
+### Tech Stack
 - **Language:** Python  
 - **Libraries:** Pandas, NumPy, Matplotlib, Seaborn  
 - **Tools:** Jupyter Notebook, VS Code, Google Colab  
-- **Workflow:** Automated ETL pipeline (Extract → Transform → Merge → Analyze) 
-- **Visualization:** Tableau 
+- **Workflow:** Automated ETL pipeline (Extract → Transform → Merge → Analyze)  
+- **Visualization:** Tableau  
 
 ---
-## The automation script:
+
+### Automation Script
+The project automates the process of transforming raw workout logs into a clean, merged analytical dataset.
+
+**Workflow Highlights:**  
 1. Reads raw input files dynamically.  
 2. Cleans, standardizes, and aggregates data per metric type.  
 3. Outputs eight metric tables (four per dataset).  
-4. Merges all tables into one **final analytical dataset** used for visualization and trend analysis.
----
+4. Merges all tables into one **final analytical dataset** for visualization and trend analysis.
 
-## Analytical Focus
-1. **Load Distribution:** Total volume by muscle group and week.  
-2. **Strength Trends:** Weight-per-rep progression across time.  
-3. **Consistency Analysis:** Total sets and reps per 8-week block.  
-4. **Performance Patterns:** Identifying high-output phases and fatigue dips.  
 
----
-## Automation Highlights
-- Automatically detects and processes new raw data files.  
-- Rebuilds all metric tables and merged dataset in one run.  
-- Generates visual outputs and summary metrics without manual steps.  
-- Modular design allows expansion for future data inputs or dashboards.  
----
+**Example Snippet:**
+```python
+# Automatically rename weeks into structured blocks
+df = auto_rename_weeks(df)
+df2024 = auto_rename_weeks(df2024, block_sizes=[8,8,8,8,4])
 
-## Key Python Concepts Demonstrated
-- Data extraction, transformation, and merging  
-- Multi-table analysis and consolidation  
-- Time-based grouping and rolling averages  
-- Custom metrics (volume, efficiency ratios, etc.)  
-- Data visualization for longitudinal tracking  
+# Create metric tables for all muscles
+tables_2022 = create_metric_table(df, muscles_2022)
+tables_2024 = create_metric_table(df2024, muscles_2024)
 
----
+# Clean and prepare tables for analysis
+tables_2022_cleaned = {metric: prepare_metric_table(tables_2022, metric) for metric in metrics}
+tables_2024_cleaned = {metric: prepare_metric_table(tables_2024, metric) for metric in metrics}
 
-## Insights Summary
-- Volume and strength improved consistently across training years.  
-- Peak gains observed during 8-week structured progression phases.  
-- Identified imbalances between upper and lower body workload.  
-- Established a scalable data model for future fitness tracking automation.  
-
----
-
+# Merge datasets automatically
+the_merged = {metric: pd.concat([tables_2022_cleaned[metric], 
+                                 tables_2024_cleaned[metric]], ignore_index=True)
+              for metric in metrics}
+```
 ## 🧾 File Structure
 /Workout-Progress-Analysis
 │
 ├── data/
-│ ├── raw/ # Input workout logs
-│ ├── processed/ # Metric tables generated by script
-│ └── merged_dataset.csv # Final analytical dataset
+│   ├── raw/                     # Original input CSV files (2022–2023.csv, 2024–2025.csv)
+│   ├── processed/               # Generated metric tables (Total Load, Sets, Reps, Weight Per Rep)
+│   └── merged_dataset.csv       # Final merged dataset for analysis
 │
 ├── notebooks/
-│ ├── automation_pipeline.ipynb
-│ ├── analysis_visualization.ipynb
+│   ├── automation_pipeline.ipynb       # Full ETL workflow and metric table creation
+│   ├── analysis_visualization.ipynb    # Exploratory data analysis, plots, and trends
 │
 ├── scripts/
-│ ├── automate_metrics.py # ETL automation script
+│   └── automate_metrics.py             # Python functions for automated data cleaning & table generation
 │
-├── visuals/ # Exported charts and trend plots
-└── README.md
-
+├── visuals/                             # Exported charts, histograms, and heatmaps
+│
+└── README.md                            # Project documentation
 Link for Tableau: (https://public.tableau.com/views/WorkoutSheet/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
