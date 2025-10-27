@@ -90,4 +90,4 @@ the_merged = {metric: pd.concat([tables_2022_cleaned[metric],
 ├── visuals/                             # Exported charts, histograms, and heatmaps
 │
 └── README.md                            # Project documentation
-Link for Tableau: (https://public.tableau.com/views/WorkoutSheet/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+Link for Tableau: (https://public.tableau.com/views/WorkoutSheet/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)(https://public.tableau.com/views/WorkoutAnalyticsVisualization/WorkoutProgressDashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
